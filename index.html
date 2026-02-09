@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+
+<!-- MUY IMPORTANTE PARA IPHONE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Nuestro Tiempo ❤️</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100svh; /* Mejor que 100vh en iOS */
+        font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
+        background: linear-gradient(120deg, #ff758c, #ff7eb3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-x: hidden;
+        color: white;
+        padding: 20px;
+    }
+
+    .container {
+        text-align: center;
+        background: rgba(0, 0, 0, 0.25);
+        padding: 30px 20px;
+        border-radius: 20px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        max-width: 500px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: clamp(1.8rem, 5vw, 2.4rem);
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-weight: normal;
+        font-size: clamp(1rem, 4vw, 1.3rem);
+        margin-bottom: 25px;
+    }
+
+    .timer {
+        font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+
+    .phrase {
+        font-size: clamp(1.1rem, 4vw, 1.3rem);
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+
+    .love {
+        font-size: clamp(1.4rem, 5vw, 1.9rem);
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    .heart {
+        position: fixed; /* IMPORTANTE PARA iOS */
+        bottom: -20px;
+        color: rgba(255,255,255,0.7);
+        animation: float 6s linear infinite;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-110svh) scale(1.5);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>❤️ Nuestro Tiempo Juntos ❤️</h1>
+    <h2>Desde que empezó nuestra historia</h2>
+
+    <div class="timer" id="timer"></div>
+
+    <div class="phrase">
+        HE SIDO FELIZ TODO ESTE TIEMPO GRACIAS A TI.
+    </div>
+
+    <div class="love">
+        ❤️ TE AMO MICHELLE ❤️
+    </div>
+</div>
+
+<script>
+    const startDate = new Date(2022, 5, 14);
+
+    function updateTimer() {
+        const now = new Date();
+        const diff = now - startDate;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("timer").innerHTML =
+            `${days} días 💕<br>${hours} horas ⏰ ${minutes} minutos 💫 ${seconds} segundos`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 12) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 350);
+</script>
+
+</body>
+</html>
